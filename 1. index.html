@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Calculator by Syeed Ibrahim Shafi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #121214;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .calculator-container {
+            background: #1e1e24;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 340px;
+        }
+        .brand-name {
+            text-align: center;
+            font-size: 14px;
+            color: #00adb5;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .display {
+            width: 100%;
+            height: 70px;
+            background-color: #2d2d34;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 32px;
+            text-align: right;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        button {
+            height: 60px;
+            border: none;
+            outline: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #3e3e46;
+            color: #ffffff;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        button.operator {
+            background-color: #00adb5;
+            color: #ffffff;
+        }
+        button.clear {
+            background-color: #ff4757;
+            color: #ffffff;
+        }
+        button.equal {
+            background-color: #2ed573;
+            color: #ffffff;
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-container">
+        <div class="brand-name">SYEED IBRAHIM SHAFI</div>
+        <input type="text" class="display" id="screen" readonly placeholder="0">
+        
+        <div class="buttons-grid">
+            <button class="clear" onclick="clearScreen()">C</button>
+            <button onclick="backspace()">⌫</button>
+            <button class="operator" onclick="press('/')">/</button>
+            <button class="operator" onclick="press('*')">×</button>
+            
+            <button onclick="press('7')">7</button>
+            <button onclick="press('8')">8</button>
+            <button onclick="press('9')">9</button>
+            <button class="operator" onclick="press('-')">-</button>
+            
+            <button onclick="press('4')">4</button>
+            <button onclick="press('5')">5</button>
+            <button onclick="press('6')">6</button>
+            <button class="operator" onclick="press('+')">+</button>
+            
+            <button onclick="press('1')">1</button>
+            <button onclick="press('2')">2</button>
+            <button onclick="press('3')">3</button>
+            <button class="equal" onclick="calculate()">=</button>
+            
+            <button onclick="press('0')" style="grid-column: span 2; width: 100%;">0</button>
+            <button onclick="press('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        let screen = document.getElementById('screen');
+
+        function press(value) {
+            if (screen.value === '0' && value !== '.') {
+                screen.value = value;
+            } else {
+                screen.value += value;
+            }
+        }
+
+        function clearScreen() {
+            screen.value = '';
+        }
+
+        function backspace() {
+            screen.value = screen.value.slice(0, -1);
+        }
+
+        function calculate() {
+            try {
+                if (screen.value !== '') {
+                    screen.value = eval(screen.value);
+                }
+            } catch (error) {
+                screen.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
